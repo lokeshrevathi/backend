@@ -1,21 +1,9 @@
 version: '3.11'
 
 services:
-  db:
-    image: postgres:15
-    restart: always
-    environment:
-      POSTGRES_DB: project_dashboard_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-
   web:
     build: .
-    command: gunicorn project_dashboard.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    command: python manage.py migrate --noinput && gunicorn project_dashboard.wsgi:application --bind 0.0.0.0:8000 --workers 3
     volumes:
       - .:/app
     ports:
