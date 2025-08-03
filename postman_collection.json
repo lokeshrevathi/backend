@@ -1,0 +1,277 @@
+{
+  "info": {
+    "name": "Project Dashboard API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for testing all endpoints in the Project Dashboard API."
+  },
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"New@1234\",\n  \"password2\": \"New@1234\",\n  \"email\": \"newuser@example.com\",\n  \"first_name\": \"New\",\n  \"last_name\": \"User\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/register/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "register"]
+        }
+      }
+    },
+    {
+      "name": "Login User",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"Test@1234\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/login/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "login"]
+        }
+      }
+    },
+    {
+      "name": "User Detail",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/user/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "user"]
+        }
+      }
+    },
+    {
+      "name": "Create Project",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Project Alpha\",\n  \"description\": \"First project\",\n  \"start_date\": \"2025-07-29\",\n  \"end_date\": \"2025-08-29\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/projects/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "projects"]
+        }
+      }
+    },
+    {
+      "name": "List Projects",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/projects/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "projects"]
+        }
+      }
+    },
+    {
+      "name": "Project Detail",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/projects/{{project_id}}/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "projects", "{{project_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Create Milestone",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Milestone 1\",\n  \"due_date\": \"2025-08-01\",\n  \"project\": {{project_id}}\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/milestones/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "milestones"]
+        }
+      }
+    },
+    {
+      "name": "Create Task",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Task 1\",\n  \"description\": \"desc\",\n  \"status\": \"todo\",\n  \"priority\": \"medium\",\n  \"assignee\": {{user_id}},\n  \"milestone\": {{milestone_id}},\n  \"logged_hours\": 2.5\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/tasks/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "tasks"]
+        }
+      }
+    },
+    {
+      "name": "Task Log Time",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"hours\": 2.5\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/tasks/{{task_id}}/log_time/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "tasks", "{{task_id}}", "log_time"]
+        }
+      }
+    },
+    {
+      "name": "Project Total Hours",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/projects/{{project_id}}/total_hours/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "projects", "{{project_id}}", "total_hours"]
+        }
+      }
+    },
+    {
+      "name": "Project Progress",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/projects/{{project_id}}/progress/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "projects", "{{project_id}}", "progress"]
+        }
+      }
+    },
+    {
+      "name": "Task Filtering",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/tasks/?status=todo&assignee={{user_id}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "tasks"],
+          "query": [
+            { "key": "status", "value": "todo" },
+            { "key": "assignee", "value": "{{user_id}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Comment CRUD",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"task\": {{task_id}},\n  \"user\": {{user_id}},\n  \"content\": \"Nice work!\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/comments/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "comments"]
+        }
+      }
+    },
+    {
+      "name": "Attachment CRUD",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "task", "value": "{{task_id}}", "type": "text" },
+            { "key": "file", "src": "test.txt", "type": "file" }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/attachments/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "attachments"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+# Python cache and virtual environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.venv/
+env/
+venv/
+
+# OS and editor files
+*.swp
+*.swo
+*.bak
+.DS_Store
+Thumbs.db
+
+# Git and version control
+.git/
+.gitignore
+
+# IDE/project files
+.vscode/
+.idea/
+*.code-workspace
+
+# Test and coverage output
+.coverage
+htmlcov/
+*.log
+
+# Static/media files (if generated locally)
+staticfiles/
+media/

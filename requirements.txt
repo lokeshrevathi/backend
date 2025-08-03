@@ -1,0 +1,12 @@
+Django>=5.2.4
+psycopg2-binary
+djangorestframework
+django-cors-headers
+djangorestframework-simplejwt
+django-filter
+drf-spectacular
+gunicorn
+whitenoise
+dj-database-url
+coverage
+dotenv

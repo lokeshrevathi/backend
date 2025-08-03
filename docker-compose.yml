@@ -1,0 +1,32 @@
+version: '3.11'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: project_dashboard_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    command: gunicorn project_dashboard.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/project_dashboard_db
+      SECRET_KEY: 9qljoisws@_h5vdu90z@18x$d6$xg6p&3q$b++^k3*8hg^k@#z
+      ALLOWED_HOSTS: localhost,127.0.0.1,192.168.20.1
+      CORS_ALLOWED_ORIGINS: http://localhost:3000
+
+volumes:
+  postgres_data:
