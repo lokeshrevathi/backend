@@ -17,13 +17,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from django.http import JsonResponse
+from rest_framework_simplejwt.views import TokenRefreshView
 
 def health_check(request):
-    return JsonResponse({"status": "healthy"}, status=200)
+    from django.http import JsonResponse
+    return JsonResponse({"status": "healthy"})
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("api/", include("core.urls")),
-    path("health/", health_check, name="health_check"),
+    path('admin/', admin.site.urls),
+    path('api/', include('core.urls')),
+    path('health/', health_check, name="health_check"),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
